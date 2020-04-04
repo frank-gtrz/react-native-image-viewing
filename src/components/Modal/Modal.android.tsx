@@ -12,66 +12,67 @@ import {
   View,
   StyleSheet,
   StatusBar,
+  Modal,
   ModalProps
 } from "react-native";
 
-type Props = ModalProps & {
-  children: JSX.Element;
-};
+// type Props = ModalProps & {
+//   children: JSX.Element;
+// };
 
-const Modal = ({
-  visible,
-  children,
-  presentationStyle,
-  onRequestClose
-}: Props) => {
-  if (!visible) {
-    return null;
-  }
+// const Modal = ({
+//   visible,
+//   children,
+//   presentationStyle,
+//   onRequestClose
+// }: Props) => {
+//   if (!visible) {
+//     return null;
+//   }
 
-  useEffect(() => {
-    const backHandler = BackHandler.addEventListener(
-      "hardwareBackPress",
-      () => {
-        if (typeof onRequestClose === "function") {
-          onRequestClose();
-        }
+//   useEffect(() => {
+//     const backHandler = BackHandler.addEventListener(
+//       "hardwareBackPress",
+//       () => {
+//         if (typeof onRequestClose === "function") {
+//           onRequestClose();
+//         }
 
-        return true;
-      }
-    );
+//         return true;
+//       }
+//     );
 
-    return () => {
-      backHandler.remove();
-    };
-  }, []);
+//     return () => {
+//       backHandler.remove();
+//     };
+//   }, []);
 
-  const statusBarHidden = presentationStyle === "overFullScreen";
-  const statusBarStateStyle =
-    presentationStyle === "overFullScreen"
-      ? styles.overFullscreen
-      : styles.defaultStyle;
+//   const statusBarHidden = presentationStyle === "overFullScreen";
+//   const statusBarStateStyle =
+//     presentationStyle === "overFullScreen"
+//       ? styles.overFullscreen
+//       : styles.defaultStyle;
 
-  return (
-    <>
-      {statusBarHidden && <StatusBar hidden />}
-      <View style={[styles.root, statusBarStateStyle]}>{children}</View>
-    </>
-  );
-};
+//   return (
+//     <>
+//       {statusBarHidden && <StatusBar hidden />}
+//       <View style={[styles.root, statusBarStateStyle]}>{children}</View>
+//     </>
+//   );
+// };
 
-const styles = StyleSheet.create({
-  root: {
-    ...StyleSheet.absoluteFillObject,
-    zIndex: 1000,
-    backgroundColor: "transparent"
-  },
-  overFullscreen: {
-    top: 0
-  },
-  defaultStyle: {
-    top: StatusBar.currentHeight
-  }
-});
+// const styles = StyleSheet.create({
+//   root: {
+//     ...StyleSheet.absoluteFillObject,
+//     zIndex: 1000,
+//     backgroundColor: "transparent"
+//   },
+//   overFullscreen: {
+//     top: 0
+//   },
+//   defaultStyle: {
+//     top: StatusBar.currentHeight
+//   }
+// });
 
 export default Modal;
